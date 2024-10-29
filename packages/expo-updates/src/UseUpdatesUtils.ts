@@ -22,15 +22,17 @@ export const currentlyRunning: CurrentlyRunningInfo = {
 // Type for the state managed by useUpdates().
 // Used internally by this module and not exported publicly.
 export type UseUpdatesStateType = {
+  isStartupProcedureRunning: boolean;
   availableUpdate?: UpdateInfo;
   downloadedUpdate?: UpdateInfo;
   checkError?: Error;
   downloadError?: Error;
-  initializationError?: Error;
   isUpdateAvailable: boolean;
   isUpdatePending: boolean;
   isChecking: boolean;
   isDownloading: boolean;
+  isRestarting: boolean;
+  restartCount: number;
   lastCheckForUpdateTimeSinceRestart?: Date;
 };
 
@@ -73,10 +75,13 @@ export const updatesStateFromContext: (
       ? updateFromRollback(context.rollback)
       : undefined;
   return {
+    isStartupProcedureRunning: context.isStartupProcedureRunning,
     isUpdateAvailable: context.isUpdateAvailable,
     isUpdatePending: context.isUpdatePending,
     isChecking: context.isChecking,
     isDownloading: context.isDownloading,
+    isRestarting: context.isRestarting,
+    restartCount: context.restartCount,
     availableUpdate,
     downloadedUpdate,
     checkError: context.checkError,

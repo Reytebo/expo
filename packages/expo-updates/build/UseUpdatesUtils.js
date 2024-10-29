@@ -44,10 +44,13 @@ export const updatesStateFromContext = (context) => {
             ? updateFromRollback(context.rollback)
             : undefined;
     return {
+        isStartupProcedureRunning: context.isStartupProcedureRunning,
         isUpdateAvailable: context.isUpdateAvailable,
         isUpdatePending: context.isUpdatePending,
         isChecking: context.isChecking,
         isDownloading: context.isDownloading,
+        isRestarting: context.isRestarting,
+        restartCount: context.restartCount,
         availableUpdate,
         downloadedUpdate,
         checkError: context.checkError,

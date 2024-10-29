@@ -2,15 +2,17 @@ import type { Manifest, UpdatesNativeStateMachineContext, UpdatesNativeStateRoll
 import { type CurrentlyRunningInfo, type UpdateInfo } from './UseUpdates.types';
 export declare const currentlyRunning: CurrentlyRunningInfo;
 export type UseUpdatesStateType = {
+    isStartupProcedureRunning: boolean;
     availableUpdate?: UpdateInfo;
     downloadedUpdate?: UpdateInfo;
     checkError?: Error;
     downloadError?: Error;
-    initializationError?: Error;
     isUpdateAvailable: boolean;
     isUpdatePending: boolean;
     isChecking: boolean;
     isDownloading: boolean;
+    isRestarting: boolean;
+    restartCount: number;
     lastCheckForUpdateTimeSinceRestart?: Date;
 };
 export declare const updateFromManifest: (manifest: NonNullable<Manifest>) => UpdateInfo;
